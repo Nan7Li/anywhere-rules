@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Anywhere — AmazonJP</title>
+<style>
+:root{color-scheme:light dark;font-family:-apple-system,system-ui,sans-serif}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0f1216;color:#e8eef6}
+main{max-width:34rem;padding:2rem;text-align:center}
+h1{font-size:1.35rem;margin:0 0 .75rem}
+p{line-height:1.6;color:#a9b8c8;margin:0 0 1.1rem;font-size:.95rem}
+a.btn{display:inline-block;padding:.85rem 1.4rem;border-radius:12px;background:#2b7fff;color:#fff;text-decoration:none;font-weight:600}
+code{font-size:.8rem;word-break:break-all;color:#7f93a8}
+</style>
+</head>
+<body>
+<main>
+  <h1>AmazonJP 分流規則集</h1>
+  <p id="status">正在準備匯入連結…</p>
+  <p><a id="open" class="btn" href="#" rel="nofollow">在 Anywhere 中開啟</a></p>
+  <p><code id="target"></code></p>
+  <p style="font-size:.82rem">沒反應的話：複製下面網址，在 Safari 網址列貼上開啟；或確認 Anywhere 版本 ≥ 281。</p>
+</main>
+<script>
+(function () {
+  var src = "https://cdn.jsdelivr.net/gh/Nan7Li/anywhere-rules@main/AmazonJP.arrs";
+  var p = new URLSearchParams(location.search);
+  if (p.get("link")) src = p.get("link");
+  var deep = "anywhere://add-rule-set?link=" + encodeURIComponent(src);
+  document.getElementById("open").href = deep;
+  document.getElementById("target").textContent = src;
+  document.getElementById("status").textContent = "點下面按鈕，會交給 Anywhere 匯入。";
+  document.getElementById("open").addEventListener("click", function () {
+    document.getElementById("status").textContent = "已送出，若沒有跳轉請改用 Safari 開啟本頁。";
+  });
+})();
+</script>
+</body>
+</html>
